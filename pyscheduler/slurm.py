@@ -76,7 +76,12 @@ class slurm(object):
         """
         Submit job
         """
-        os.system("sbatch %s", self.script)
+        #os.system("sbatch %s", self.script)
+        cmd = ['sbatch', self.script]
+        proc = sub.Popen(cmd, stdin=sub.PIPE,stdout=sub.PIPE,stderr=sub.PIPE)
+        out,err = proc.communicate(input="")
+        proc.wait()
+        print(out)
         
 
 
